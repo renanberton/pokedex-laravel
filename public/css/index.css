@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    height: auto;
+    background-color: #3c3c3c;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    width: 550px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    list-style: none;
+}
+
+.container li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #c6c6c6;
+    width: 150px;
+    border-radius: 4px;
+    text-transform: capitalize;
+    padding: 20px 0;
+}
+
+.container li p, .container li span {
+    color: #3c3c3c;
+    font-family: 'Francois One', sans-serif;
+}
+
+.container li p {
+    font-size: 20px;
+}
+
+.container button {
+    background-color: transparent;
+    border: none;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF1C1C;
+    width: 200px;
+    height: auto;
+    gap: 10x;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    padding: 5px 0;
+}
+
+#loading {
+    margin-top: 50px;
+}
