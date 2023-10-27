@@ -30,6 +30,7 @@
             <img src="/images/loading-animation.gif" style="background-color: transparent !important" alt="Carregando..." width="50px">
         </div>
     </div>
+    <button id="btnTop" title="Voltar ao topo">Topo</button>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>
     <script>
         const typeTranslation = {
@@ -83,7 +84,23 @@
                 });
             });
         });
-    </script>
 
+        $(document).ready(function(){
+            // Quando o usuário rola a página para baixo 20px do topo, mostre o botão
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 20) {
+                    $('#btnTop').fadeIn();
+                } else {
+                    $('#btnTop').fadeOut();
+                }
+            });
+
+            // Quando o usuário clica no botão, role a página para o topo do documento
+            $('#btnTop').click(function(){
+                $('html, body').animate({scrollTop : 0},800);
+                return false;
+            });
+        });
+    </script>
 </body>
 </html>

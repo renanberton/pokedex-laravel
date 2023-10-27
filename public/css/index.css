@@ -91,3 +91,23 @@
 .pokemon-type-dragon { background-color: #7038F8; }
 .pokemon-type-dark { background-color: #705848; }
 .pokemon-type-fairy { background-color: #EE99AC; }
+
+#btnTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+#btnTop:hover {
+    background-color: #555;
+}
