@@ -37,6 +37,7 @@
     border-radius: 4px;
     text-transform: capitalize;
     padding: 20px 0;
+    min-width: 200px;
 }
 
 .container li p, .container li span {
