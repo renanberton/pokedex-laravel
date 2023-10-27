@@ -16,7 +16,7 @@
                 <p>
                     {{ $pokemon['name'] }}
                 </p>
-                <img src="{{ $pokemon['image'] }}" alt="">
+                <img src="{{ $pokemon['image'] }}" alt="Pokémon {{ $pokemon['name'] }}" width="125px">
                 <span>{{ $pokemon['typeTranslated'] }}</span> <!-- aqui usamos o tipo traduzido -->
                 <span>Peso: {{ $pokemon['height'] }}Kgs</span>
             </li>
