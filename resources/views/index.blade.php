@@ -16,7 +16,7 @@
                 <p>
                     {{ $pokemon['name'] }}
                 </p>
-                <img src="{{ $pokemon['image'] }}" alt="Pokémon {{ $pokemon['name'] }}" width="125px">
+                <img src="{{ $pokemon['image'] }}" alt="Pokémon {{ $pokemon['name'] }}" width="100px" height="100px">
                 <span>{{ $pokemon['typeTranslated'] }}</span> <!-- aqui usamos o tipo traduzido -->
                 <span>Peso: {{ $pokemon['height'] }}Kgs</span>
             </li>
@@ -70,7 +70,7 @@
                         $('#pokemonList').append(`
                         <li class="pokemon-type-${pokemon.typeEnglish.toLowerCase()}">
                                 <p>${pokemon.name}</p>
-                                <img src="${pokemon.image}" alt="${pokemon.name}">
+                                <img src="${pokemon.image}" alt="${pokemon.name}" width="100px" height="100px">
                                 <span>${pokemon.typeTranslated}</span> <!-- aqui usamos o tipo traduzido -->
                                 <span>Peso: ${pokemon.height}Kgs</span>
                             </li>

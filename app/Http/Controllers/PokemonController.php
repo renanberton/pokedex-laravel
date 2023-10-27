@@ -40,7 +40,7 @@ class PokemonController extends Controller
                     $pokemonData = json_decode($response->getBody(), true);
                     $pokemonDetails[] = [
                         'name' => $pokemonData['name'],
-                        'image' => $pokemonData['sprites']['front_default'],
+                        'image' => $pokemonData['sprites']['other']['dream_world']['front_default'],
                         'typeEnglish' => $pokemonData['types'][0]['type']['name'], // tipo em inglês
                         'typeTranslated' => $this->translateType($pokemonData['types'][0]['type']['name']),
                         'height' => $pokemonData['height']
