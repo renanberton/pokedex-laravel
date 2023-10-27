@@ -11,7 +11,7 @@
     <div class="container">
         <ul id="pokemonList">
             @foreach ($data as $pokemon)
-            <li>
+            <li class="pokemon-type-{{ strtolower($pokemon['type']) }}">
                 <p>
                     {{ $pokemon['name'] }}
                 </p>
@@ -41,7 +41,7 @@
                 $.get('/index/' + offset, function(data) {
                     data.forEach(pokemon => {
                         $('#pokemonList').append(`
-                            <li>
+                            <li class="pokemon-type-${pokemon.type.toLowerCase()}">
                                 <p>${pokemon.name}</p>
                                 <img src="${pokemon.image}" alt="${pokemon.name}">
                                 <span>${pokemon.type}</span>
