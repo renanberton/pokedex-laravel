@@ -41,21 +41,18 @@ class PokemonController extends Controller
                     $pokemonDetails[] = [
                         'name' => $pokemonData['name'],
                         'image' => $pokemonData['sprites']['front_default'],
-                        'type' => $this->translateType($pokemonData['types'][0]['type']['name']),
-                        'typeEnglish' => $pokemonData['types'][0]['type']['name'],
+                        'typeEnglish' => $pokemonData['types'][0]['type']['name'], // tipo em inglês
+                        'typeTranslated' => $this->translateType($pokemonData['types'][0]['type']['name']),
                         'height' => $pokemonData['height']
                     ];
                 },
                 'rejected' => function ($reason, $index) {
-                    // Handle the error here if you like.
                 }
             ]);
     
-            // Inicie o pool e aguarde todas as requisições.
             $promise = $pool->promise();
             $promise->wait();
     
-            // Reordenando os detalhes do Pokémon
             $pokemonDetailsOrdered = [];
             foreach ($data['results'] as $pokemon) {
                 foreach ($pokemonDetails as $detail) {

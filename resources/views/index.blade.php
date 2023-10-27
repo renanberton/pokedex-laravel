@@ -16,7 +16,7 @@
                     {{ $pokemon['name'] }}
                 </p>
                 <img src="{{ $pokemon['image'] }}" alt="">
-                <span>{{ $pokemon['type'] }}</span>
+                <span>{{ $pokemon['typeTranslated'] }}</span> <!-- aqui usamos o tipo traduzido -->
                 <span>Peso: {{ $pokemon['height'] }}Kgs</span>
             </li>
             @endforeach
@@ -66,10 +66,10 @@
                 $.get('/index/' + offset, function(data) {
                     data.forEach(pokemon => {
                         $('#pokemonList').append(`
-                            <li class="pokemon-type-${pokemon.type.toLowerCase()}">
+                        <li class="pokemon-type-${pokemon.typeEnglish.toLowerCase()}">
                                 <p>${pokemon.name}</p>
                                 <img src="${pokemon.image}" alt="${pokemon.name}">
-                                <span>{{ $pokemon['type'] }}</span>
+                                <span>${pokemon.typeTranslated}</span> <!-- aqui usamos o tipo traduzido -->
                                 <span>Peso: ${pokemon.height}Kgs</span>
                             </li>
                         `);
