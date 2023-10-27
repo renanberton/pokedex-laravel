@@ -41,7 +41,8 @@ class PokemonController extends Controller
                     $pokemonDetails[] = [
                         'name' => $pokemonData['name'],
                         'image' => $pokemonData['sprites']['front_default'],
-                        'type' => $pokemonData['types'][0]['type']['name'],
+                        'type' => $this->translateType($pokemonData['types'][0]['type']['name']),
+                        'typeEnglish' => $pokemonData['types'][0]['type']['name'],
                         'height' => $pokemonData['height']
                     ];
                 },
@@ -71,5 +72,30 @@ class PokemonController extends Controller
                 return view('index', ['data' => $pokemonDetailsOrdered]);
             }
         }
+    }
+
+    private function translateType($typeInEnglish) {
+        $typeTranslation = [
+            "normal" => "normal",
+            "fighting" => "lutador",
+            "flying" => "voador",
+            "poison" => "venenoso",
+            "ground" => "terra",
+            "rock" => "pedra",
+            "bug" => "inseto",
+            "ghost" => "fantasma",
+            "steel" => "aço",
+            "fire" => "fogo",
+            "water" => "água",
+            "grass" => "grama",
+            "electric" => "elétrico",
+            "psychic" => "psíquico",
+            "ice" => "gelo",
+            "dragon" => "dragão",
+            "dark" => "sombrio",
+            "fairy" => "fada"
+        ];
+
+        return $typeTranslation[$typeInEnglish] ?? $typeInEnglish;
     }
 }

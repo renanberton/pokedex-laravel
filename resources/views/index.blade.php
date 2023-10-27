@@ -11,7 +11,7 @@
     <div class="container">
         <ul id="pokemonList">
             @foreach ($data as $pokemon)
-            <li class="pokemon-type-{{ strtolower($pokemon['type']) }}">
+            <li class="pokemon-type-{{ strtolower($pokemon['typeEnglish']) }}">
                 <p>
                     {{ $pokemon['name'] }}
                 </p>
@@ -31,6 +31,31 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>
     <script>
+        const typeTranslation = {
+            "normal": "normal",
+            "fighting": "lutador",
+            "flying": "voador",
+            "poison": "venenoso",
+            "ground": "terra",
+            "rock": "pedra",
+            "bug": "inseto",
+            "ghost": "fantasma",
+            "steel": "aço",
+            "fire": "fogo",
+            "water": "água",
+            "grass": "grama",
+            "electric": "elétrico",
+            "psychic": "psíquico",
+            "ice": "gelo",
+            "dragon": "dragão",
+            "dark": "sombrio",
+            "fairy": "fada"
+        };
+
+        const translateType = (typeInEnglish) => {
+            return typeTranslation[typeInEnglish] || typeInEnglish;
+        };
+
         $(document).ready(function() {
             let offset = {{ count($data) }};
             $('#loadMore').click(function() {
@@ -44,7 +69,7 @@
                             <li class="pokemon-type-${pokemon.type.toLowerCase()}">
                                 <p>${pokemon.name}</p>
                                 <img src="${pokemon.image}" alt="${pokemon.name}">
-                                <span>${pokemon.type}</span>
+                                <span>{{ $pokemon['type'] }}</span>
                                 <span>Peso: ${pokemon.height}Kgs</span>
                             </li>
                         `);
