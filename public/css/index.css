@@ -21,7 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 100px;
     width: 90%;
     flex-wrap: wrap;
     margin: 0 auto;
@@ -31,18 +31,24 @@
 .container li {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    width: 30%;
-    height: 100%;
+    width: 20%;
+    height: 250px;
     border-radius: 4px;
     text-transform: capitalize;
     padding: 20px 0;
     min-width: 150px;
     gap: 10px;
+    border: 10px solid yellow;
 }
 
-.container li p, .container li span {
+.container li p {
+    color: #13000A;
+    font-family: 'Francois One', sans-serif;
+}
+
+.container li span {
     color: #e6e6e6;
     font-family: 'Francois One', sans-serif;
 }
