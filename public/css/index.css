@@ -33,7 +33,8 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 20%;
+    min-width: 90%;
+    width: 250px;
     height: 250px;
     border-radius: 4px;
     text-transform: capitalize;
@@ -46,6 +47,7 @@
 .container li p {
     color: #13000A;
     font-family: 'Francois One', sans-serif;
+    font-size: 20px;
 }
 
 .container li span {
@@ -53,8 +55,10 @@
     font-family: 'Francois One', sans-serif;
 }
 
-.container li p {
-    font-size: 20px;
+.container li .box-name {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
 }
 
 .container button {

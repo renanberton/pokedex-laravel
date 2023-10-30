@@ -13,9 +13,14 @@
         <ul id="pokemonList">
             @foreach ($data as $pokemon)
             <li class="pokemon-type-{{ strtolower($pokemon['typeEnglish']) }}">
-                <p>
-                    {{ $pokemon['name'] }}
-                </p>
+                <div class="box-name">
+                    <p>
+                        {{ $pokemon['name'] }}
+                    </p>
+                    <p>
+                        HP {{ $pokemon['hp'] }}
+                    </p>
+                </div>
                 <img src="{{ $pokemon['image'] }}" alt="Pokémon {{ $pokemon['name'] }}" width="100px" height="100px">
                 <span>{{ $pokemon['typeTranslated'] }}</span> <!-- aqui usamos o tipo traduzido -->
                 <span>Peso: {{ $pokemon['height'] }}Kgs</span>
@@ -69,7 +74,9 @@
                     data.forEach(pokemon => {
                         $('#pokemonList').append(`
                         <li class="pokemon-type-${pokemon.typeEnglish.toLowerCase()}">
-                                <p>${pokemon.name}</p>
+                                <p>${pokemon.name}
+                                    ${ pokemon.hp }
+                                </p>
                                 <img src="${pokemon.image}" alt="${pokemon.name}" width="100px" height="100px">
                                 <span>${pokemon.typeTranslated}</span> <!-- aqui usamos o tipo traduzido -->
                                 <span>Peso: ${pokemon.height}Kgs</span>
