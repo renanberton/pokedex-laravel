@@ -12,7 +12,7 @@ class PokemonController extends Controller
 {
     public function searchPokemon(Request $request)
     {
-        $pokemon = $request->input('pokemon');
+        $pokemon = strtolower($request->input('pokemon'));
         
         if (empty($pokemon) || !$pokemon) {
             return redirect('index');
