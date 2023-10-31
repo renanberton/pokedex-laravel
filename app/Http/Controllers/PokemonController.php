@@ -10,6 +10,46 @@ use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
 class PokemonController extends Controller
 {
+    public function searchPokemon(Request $request)
+    {
+        $pokemon = $request->input('pokemon');
+        
+        if (empty($pokemon) || !$pokemon) {
+            return redirect('index');
+        }
+
+        $apiUrl = "https://pokeapi.co/api/v2/pokemon/{$pokemon}";
+        
+        $client = new Client();
+
+        try {
+            $response = $client->get($apiUrl);
+        
+            if ($response->getStatusCode() === 200) {
+                $pokemonData = json_decode($response->getBody(), true);
+            
+                if ($pokemonData) {
+                    $pokemonDetails = [
+                        'name' => $pokemonData['name'],
+                        'hp' => $pokemonData['stats'][0]['base_stat'],
+                        'image' => $pokemonData['sprites']['other']['dream_world']['front_default'],
+                        'typeEnglish' => $pokemonData['types'][0]['type']['name'],
+                        'typeTranslated' => $this->translateType($pokemonData['types'][0]['type']['name']),
+                        'height' => $pokemonData['height']
+                    ];
+            
+                    if (request()->ajax()) {
+                        return response()->json($pokemonDetails);
+                    } else {
+                        return view('search-pokemon', ['data' => $pokemonDetails]);
+                    }
+                }
+            }
+        } catch(\Exception $e) {
+            return view('search-pokemon', ['error' => 'O Pokémon não foi encontrado. <br> Verifique o nome e tente novamente.']);
+        }
+    }
+
     public function getAllPokemons($offset = 0) 
     {
         $endpoint = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=". $offset;
