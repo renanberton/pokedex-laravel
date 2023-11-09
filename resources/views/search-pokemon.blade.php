@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pokédex</title>
+    @if(isset($data))
+    <title>Pokédex - {{ ucfirst($data['name']) }}</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 </head>
@@ -16,7 +17,6 @@
             <input type="text" id="pokemon" name="pokemon" placeholder="Digite aqui">
             <input type="submit" name="btnSubmit" value="Pesquisar">
         </form>
-        @if(isset($data))
         <ul id="pokemonList">
             <li class="pokemon-type-{{ strtolower($data['typeEnglish']) }}">
                 <div class="box-name">
