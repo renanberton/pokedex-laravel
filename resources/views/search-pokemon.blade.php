@@ -29,7 +29,7 @@
                 </div>
                 <img src="{{ $data['image'] }}" alt="Pokémon {{ $data['name'] }}" width="100px" height="100px">
                 <span>{{ $data['typeTranslated'] }}</span>
-                <span>Peso: {{ $data['height'] }}Kgs</span>
+                <span>Peso: {{ $data['weight'] }}Kgs</span>
             </li>
         </ul>
         @elseif(isset($error))

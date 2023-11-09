@@ -89,6 +89,12 @@
     padding: 5px 0;
 }
 
+.container button:hover {
+    background-color: transparent;
+    border: 2px solid #fff;
+    padding: 5px 0;
+}
+
 #loading {
     margin-top: 50px;
 }
@@ -129,7 +135,9 @@
 }
 
 #btnTop:hover {
-    background-color: #555;
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
 }
 
 .container form {

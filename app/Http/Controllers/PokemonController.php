@@ -35,7 +35,7 @@ class PokemonController extends Controller
                         'image' => $pokemonData['sprites']['other']['dream_world']['front_default'],
                         'typeEnglish' => $pokemonData['types'][0]['type']['name'],
                         'typeTranslated' => $this->translateType($pokemonData['types'][0]['type']['name']),
-                        'height' => $pokemonData['height']
+                        'weight' => $pokemonData['weight']
                     ];
             
                     if (request()->ajax()) {
