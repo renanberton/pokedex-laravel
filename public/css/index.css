@@ -27,6 +27,7 @@
     flex-wrap: wrap;
     margin: 0 auto;
     list-style: none;
+    text-decoration: none !important;
 }
 
 .container li {

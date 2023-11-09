@@ -18,19 +18,21 @@
         </form>
         <ul id="pokemonList">
             @foreach ($data as $pokemon)
-            <li class="pokemon-type-{{ strtolower($pokemon['typeEnglish']) }}">
-                <div class="box-name">
-                    <p>
-                        {{ $pokemon['name'] }}
-                    </p>
-                    <p>
-                        HP {{ $pokemon['hp'] }}
-                    </p>
-                </div>
-                <img src="{{ $pokemon['image'] }}" alt="Pokémon {{ $pokemon['name'] }}" width="100px" height="100px">
-                <span>{{ $pokemon['typeTranslated'] }}</span> <!-- aqui usamos o tipo traduzido -->
-                <span>Peso: {{ $pokemon['height'] }}Kgs</span>
-            </li>
+            <a href="/search-pokemon?pokemon={{ $pokemon['name'] }}" style="text-decoration: none;">
+                <li class="pokemon-type-{{ strtolower($pokemon['typeEnglish']) }}">
+                    <div class="box-name">
+                        <p>
+                            {{ $pokemon['name'] }}
+                        </p>
+                        <p>
+                            HP {{ $pokemon['hp'] }}
+                        </p>
+                    </div>
+                    <img src="{{ $pokemon['image'] }}" alt="Pokémon {{ $pokemon['name'] }}" width="100px" height="100px">
+                    <span>{{ $pokemon['typeTranslated'] }}</span> <!-- aqui usamos o tipo traduzido -->
+                    <span>Peso: {{ $pokemon['height'] }}Kgs</span>
+                </li>
+            </a>
             @endforeach
         </ul>
         <button id="loadMore">
