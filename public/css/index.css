@@ -8,9 +8,9 @@
 
 .container {
     width: 100%;
-    height: auto;
+    height: auto !important;
     background-color: #F01E27;
-    padding: 10px 0;
+    padding: 50px 0 !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -96,6 +96,10 @@
     padding: 5px 0;
 }
 
+.container .logo {
+    width: 30%;
+}
+
 #loading {
     margin-top: 50px;
 }
@@ -174,4 +178,10 @@
     height: 30px;
     border: none;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 425px) {
+    .container .logo {
+        width: 50% !important;
+    }
 }

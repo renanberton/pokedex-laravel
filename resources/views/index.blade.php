@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="./images/pokemon-logo.png" alt="Pokémon Logo" width="30%">
+        <img class="logo" src="./images/pokemon-logo.png" alt="Pokémon Logo">
         <form action="{{ route('searchPokemon') }}" action="GET">
             <label for="">Pesquise o Pokémon</label>
             <input type="text" id="pokemon" name="pokemon" placeholder="Digite aqui">
@@ -80,7 +80,8 @@
                 $.get('/index/' + offset, function(data) {
                     data.forEach(pokemon => {
                         $('#pokemonList').append(`
-                        <li class="pokemon-type-${pokemon.typeEnglish.toLowerCase()}">
+                        <a href="/search-pokemon?pokemon=${pokemon.name}" style="text-decoration: none;">
+                            <li class="pokemon-type-${pokemon.typeEnglish.toLowerCase()}">
                                 <p>${pokemon.name}
                                     ${ pokemon.hp }
                                 </p>
@@ -88,6 +89,7 @@
                                 <span>${pokemon.typeTranslated}</span> <!-- aqui usamos o tipo traduzido -->
                                 <span>Peso: ${pokemon.height}Kgs</span>
                             </li>
+                        </a>
                         `);
                     });
                     offset += 21;
