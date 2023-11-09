@@ -32,6 +32,7 @@
                 <span>Peso: {{ $data['weight'] }}Kgs</span>
             </li>
         </ul>
+        <a href="/index" class="btn-voltar">Voltar</a>
         @elseif(isset($error))
             <p class="error">{!! $error !!}</p>
         @endif

@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pokédex</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="../css/index.css">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <div class="container">
-        <img class="logo" src="./images/pokemon-logo.png" alt="Pokémon Logo">
+        <img class="logo" src="../images/pokemon-logo.png" alt="Pokémon Logo">
         <form action="{{ route('searchPokemon') }}" action="GET">
             <label for="">Pesquise o Pokémon</label>
             <input type="text" id="pokemon" name="pokemon" placeholder="Digite aqui">
