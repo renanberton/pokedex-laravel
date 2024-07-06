@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise;
 use GuzzleHttp\Pool;
-use GuzzleHttp\Psr7\Request as GuzzleRequest; 
+use GuzzleHttp\Psr7\Request as GuzzleRequest;
 
 class PokemonController extends Controller
 {
@@ -19,9 +17,12 @@ class PokemonController extends Controller
         }
 
         $apiUrl = "https://pokeapi.co/api/v2/pokemon/{$pokemon}";
-        
-        $client = new Client();
+        $caCertPath = storage_path('cacert.pem'); // Caminho para o cacert.pem
 
+        $client = new Client([
+            'verify' => false
+        ]);
+        
         try {
             $response = $client->get($apiUrl);
         
@@ -53,62 +54,56 @@ class PokemonController extends Controller
     public function getAllPokemons($offset = 0) 
     {
         $endpoint = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=". $offset;
-        $ch = curl_init($endpoint);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-        
-        if (curl_errno($ch)) {
-            echo 'Erro na requisição: ' . curl_error($ch);
-        } else {
-            $data = json_decode($response, true);
-        }
-        curl_close($ch);
-    
-        if($data) {
-            $client = new Client();
-            $requests = function ($data) {
-                foreach ($data['results'] as $pokemon) {
-                    yield new GuzzleRequest('GET', $pokemon['url']);
+        $caCertPath = storage_path('cacert.pem'); // Caminho para o cacert.pem
+
+        $client = new Client([
+            'verify' => false
+        ]);
+
+        $response = $client->get($endpoint);
+        $data = json_decode($response->getBody(), true);
+
+        $pokemonDetailsOrdered = [];
+
+        if ($data && isset($data['results'])) {
+            $requests = function () use ($data) {
+                foreach ($data['results'] as $index => $pokemon) {
+                    yield new GuzzleRequest('GET', $pokemon['url'], ['index' => $index]);
                 }
             };
-    
-            $pokemonDetails = [];
-            
-            $pool = new Pool($client, $requests($data), [
+
+            $pool = new Pool($client, $requests(), [
                 'concurrency' => 5,
-                'fulfilled' => function ($response, $index) use (&$pokemonDetails) {
+                'fulfilled' => function ($response, $index) use (&$pokemonDetailsOrdered) {
                     $pokemonData = json_decode($response->getBody(), true);
-                    $pokemonDetails[] = [
+                    $pokemonDetailsOrdered[] = [
+                        'index' => $index,
                         'name' => $pokemonData['name'],
                         'hp' => $pokemonData['stats'][0]['base_stat'],
                         'image' => $pokemonData['sprites']['other']['dream_world']['front_default'],
-                        'typeEnglish' => $pokemonData['types'][0]['type']['name'], // tipo em inglês
+                        'typeEnglish' => $pokemonData['types'][0]['type']['name'],
                         'typeTranslated' => $this->translateType($pokemonData['types'][0]['type']['name']),
                         'height' => $pokemonData['height']
                     ];
                 },
                 'rejected' => function ($reason, $index) {
+                    // Tratar rejeições, se necessário
                 }
             ]);
-    
+
             $promise = $pool->promise();
             $promise->wait();
-    
-            $pokemonDetailsOrdered = [];
-            foreach ($data['results'] as $pokemon) {
-                foreach ($pokemonDetails as $detail) {
-                    if ($detail['name'] == $pokemon['name']) {
-                        $pokemonDetailsOrdered[] = $detail;
-                        break;
-                    }
-                }
-            }
-    
-            if (request()->ajax()) {
-                return response()->json($pokemonDetailsOrdered);
-            } else {
-                return view('index', ['data' => $pokemonDetailsOrdered]);
-            }
+
+            // Ordena os Pokémons pelo índice
+            usort($pokemonDetailsOrdered, function($a, $b) {
+                return $a['index'] - $b['index'];
+            });
+        }
+
+        if (request()->ajax()) {
+            return response()->json($pokemonDetailsOrdered);
+        } else {
+            return view('index', ['data' => $pokemonDetailsOrdered]);
         }
     }
 

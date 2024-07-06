@@ -8,7 +8,7 @@
 
 .container {
     width: 100%;
-    height: auto !important;
+    height: 100%;
     background-color: #F01E27;
     padding: 50px 0 !important;
     display: flex;

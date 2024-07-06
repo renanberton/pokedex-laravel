@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @if(isset($data))
-    <title>Pokédex - {{ ucfirst($data['name']) }}</title>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 </head>
@@ -18,6 +16,7 @@
             <input type="submit" name="btnSubmit" value="Pesquisar">
         </form>
         <ul id="pokemonList">
+            @if(isset($data))
             <li class="pokemon-type-{{ strtolower($data['typeEnglish']) }}">
                 <div class="box-name">
                     <p>
@@ -30,12 +29,12 @@
                 <img src="{{ $data['image'] }}" alt="Pokémon {{ $data['name'] }}" width="100px" height="100px">
                 <span>{{ $data['typeTranslated'] }}</span>
                 <span>Peso: {{ $data['weight'] }}Kgs</span>
+                @elseif(isset($error))
+                    <p class="error" style="border: 2px solid #DDDDDD; padding: 50px; border-radius: 3px;">{!! $error !!}</p>
+                @endif
             </li>
         </ul>
         <a href="/index" class="btn-voltar">Voltar</a>
-        @elseif(isset($error))
-            <p class="error">{!! $error !!}</p>
-        @endif
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>

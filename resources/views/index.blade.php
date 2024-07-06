@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <img class="logo" src="../images/pokemon-logo.png" alt="Pokémon Logo">
-        <form action="{{ route('searchPokemon') }}" action="GET">
+        <form action="{{ route('searchPokemon') }}" method="GET">
             <label for="">Pesquise o Pokémon</label>
             <input type="text" id="pokemon" name="pokemon" placeholder="Digite aqui">
             <input type="submit" name="btnSubmit" value="Pesquisar">
