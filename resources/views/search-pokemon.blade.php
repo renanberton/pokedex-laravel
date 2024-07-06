@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @if(isset($data))
+        <title>Pokédex - {{ ucfirst($data['name']) }}</title>
+    @elseif(!isset($data))
+        <title>Pokédex</title>
+    @endif
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 </head>
