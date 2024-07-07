@@ -17,11 +17,10 @@ class PokemonController extends Controller
         }
 
         $apiUrl = "https://pokeapi.co/api/v2/pokemon/{$pokemon}";
-        $caCertPath = storage_path('cacert.pem'); // Caminho para o cacert.pem
+        $caCertPath = storage_path('C:\php-8.3.9\extras\ssl\cacert.pem'); // Caminho para o cacert.pem
+        
 
-        $client = new Client([
-            'verify' => false
-        ]);
+        $client = new Client(['verify' => 'C:\php-8.3.9\extras\ssl\cacert.pem']);
         
         try {
             $response = $client->get($apiUrl);
@@ -56,10 +55,7 @@ class PokemonController extends Controller
         $endpoint = "https://pokeapi.co/api/v2/pokemon?limit=21&offset=". $offset;
         $caCertPath = storage_path('cacert.pem'); // Caminho para o cacert.pem
 
-        $client = new Client([
-            'verify' => false
-        ]);
-
+        $client = new Client(['verify' => 'C:\php-8.3.9\extras\ssl\cacert.pem']);
         $response = $client->get($endpoint);
         $data = json_decode($response->getBody(), true);
 
