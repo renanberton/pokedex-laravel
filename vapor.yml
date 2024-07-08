@@ -1,0 +1,9 @@
+id: 63169
+name: pokedex-laravel
+environments:
+  production:
+    memory: 512
+    cli-timeout: 300
+    build:
+      - 'composer install --no-dev'
+      - 'php artisan migrate --force'
