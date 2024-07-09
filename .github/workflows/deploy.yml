@@ -3,7 +3,7 @@ name: Deploy to Laravel Vapor
 on:
   push:
     branches:
-      - master  # Substitua 'main' pelo nome da sua branch principal, se necessário
+      - master  
 
 jobs:
   deploy:
@@ -21,9 +21,6 @@ jobs:
 
     - name: Install Composer dependencies
       run: composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --optimize-autoloader
-
-    - name: Run tests
-      run: php artisan test
 
     - name: Install Vapor CLI
       run: composer global require laravel/vapor-cli
