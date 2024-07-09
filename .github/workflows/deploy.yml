@@ -28,7 +28,6 @@ jobs:
       run: |
         mkdir -p database
         touch database/database.sqlite
-    - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
     - name: Require Vapor CLI
       run: composer global require laravel/vapor-cli
     - name: Install Project Dependencies
