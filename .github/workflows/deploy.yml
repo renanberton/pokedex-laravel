@@ -1,41 +1,28 @@
-name: Deploy to Laravel Vapor
+name: Deploy
 
 on:
   push:
-    branches:
-      - master  
+    branches: [ master ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.3'  
-        extensions: mbstring, bcmath, xml, curl, gd
-
-    - name: Install Composer dependencies
-      run: composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --optimize-autoloader
-
-    - name: Install Vapor CLI
-      run: composer global require laravel/vapor-cli
-
-    - name: Set Vapor team
-      env:
-        VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
-      run: |
-        export PATH="$HOME/.composer/vendor/bin:$PATH"
-        vapor team:use 63169  
-
-    - name: Deploy to Vapor
-      env:
-        VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
-        VAPOR_ENVIRONMENT: production 
-      run: |
-        export PATH="$HOME/.composer/vendor/bin:$PATH"
-        vapor deploy $VAPOR_ENVIRONMENT --team=63169  
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          tools: composer:v2
+          coverage: none
+      - name: Require Vapor CLI
+        run: composer global require laravel/vapor-cli
+      - name: Install Project Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+      - name: Deploy Environment
+        run: vapor deploy
+        env:
+          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
+          VAPOR_TEAM_ID: 63169
+          VAPOR_ENVIRONMENT: 'production'
