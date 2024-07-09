@@ -29,12 +29,12 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
-        - name: Require Vapor CLI
-        run: composer global require laravel/vapor-cli
-      - name: Install Project Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
-      - name: Deploy Environment
-        env:
-          VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
-        run: vapor deploy
+    - name: Require Vapor CLI
+      run: composer global require laravel/vapor-cli
+    - name: Install Project Dependencies
+      run: composer install --no-interaction --prefer-dist --optimize-autoloader
+    - name: Deploy Environment
+      env:
+        VAPOR_API_TOKEN: ${{ secrets.VAPOR_API_TOKEN }}
+      run: vapor deploy
 
