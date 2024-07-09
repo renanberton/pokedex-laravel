@@ -3,7 +3,7 @@ name: Deploy to Laravel Vapor
 on:
   push:
     branches:
-      - main  # Substitua 'main' pelo nome da sua branch principal, se necessário
+      - master  # Substitua 'main' pelo nome da sua branch principal, se necessário
 
 jobs:
   deploy:
